@@ -1,20 +1,22 @@
 import schedule
 import time
-from urllib.request import urlopen
 import re
+import requests
 from twilio.rest import TwilioRestClient
+
 
 stock = False
 
 
 print("Begin check")
 
+
 def check():
     account_sid = "AC542e629143b6f86ab8b0c92b01fbfbfd"
     auth_token = "81b095f826a95ace93ab28257e5b9aa6"
     client = TwilioRestClient(account_sid, auth_token)
-    with urlopen('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/') as f:
-        site = f.read()
+    with requests.get('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/') as f:
+        site = f.text
         textonpage = re.findall(b'In Stock', site)
     if len(textonpage) == 0:
         print("Item not in stock.")
