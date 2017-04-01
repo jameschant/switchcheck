@@ -6,12 +6,12 @@ import re
 
 stock = False
 
-site = urlopen('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/').read()
-textonpage = re.findall(b'In Stock.', site)
-# client = TwilioRestClient("XX", "YY")
-
 
 def check():
+    with urlopen('https://www.reddit.com/r/FIREUK/comments/5hqszm/pension_contributions/') as f:
+        site = f.read()
+        textonpage = re.findall(b'boots', site)
+    # client = TwilioRestClient("XX", "YY")
     if len(textonpage) == 0:
         print("Not there.")
     else:
@@ -28,6 +28,7 @@ schedule.every(20).seconds.do(check)
 
 # If there is no stock, run the check until there is.
 while stock == False:
+    # Set the time interval to run on
     print("Running")
     schedule.run_pending()
     time.sleep(1)
