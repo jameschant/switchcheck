@@ -15,9 +15,9 @@ def check():
     account_sid = "AC542e629143b6f86ab8b0c92b01fbfbfd"
     auth_token = "81b095f826a95ace93ab28257e5b9aa6"
     client = TwilioRestClient(account_sid, auth_token)
-    f = requests.get('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/')
-    site = f.text
-    textonpage = re.findall(b'In Stock', site)
+    page = requests.get('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/')
+    html_contents = str(page.text)
+    textonpage = re.findall('In Stock', html_contents)
     if len(textonpage) == 0:
         print("Item not in stock.")
     else:
@@ -30,7 +30,7 @@ def check():
             body="The Nintendo Switch is in stock on Amazon UK!")
 
 # Set the time interval for check to run
-schedule.every(2).minutes.do(check)
+schedule.every(20).seconds.do(check)
 
 
 # Starting with the assumption there is no stock, run the check until there is
