@@ -30,7 +30,7 @@ def check():
             body="The Nintendo Switch is in stock on Amazon UK!")
 
 # Set the time interval for check to run
-schedule.every(20).seconds.do(check)
+schedule.every(5).minutes.do(check)
 
 
 # Starting with the assumption there is no stock, run the check until there is
