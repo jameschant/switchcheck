@@ -1,1 +1,1 @@
-web: python switchcheck.py
+worker: python switchcheck.py
