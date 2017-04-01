@@ -8,8 +8,8 @@ stock = False
 
 
 def check():
-    account_sid = "XX"
-    auth_token = "YY"
+    account_sid = ""
+    auth_token = ""
     client = TwilioRestClient(account_sid, auth_token)
     with urlopen('https://www.amazon.co.uk/Nintendo-UK-NSHEHWNIN45229-Switch-Grey/dp/B01MFADJFV/') as f:
         site = f.read()
